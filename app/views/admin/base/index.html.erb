@@ -1,29 +1,29 @@
 <div class='section'>
   <div class='box'>
-  <h3>问卷统计</h3>
-  共有<%=Form.count%>个问卷, <%= Form.sum(:rows_count) %>个回应
+  <h3>Form Summary</h3>
+  Total <%=Form.count%> surveys, <%= Form.sum(:rows_count) %> answers.
   </div>
   <div class='box'>
-  <h3>用户统计</h3> 
-  共有<%=User.count%>个用户 
+  <h3>User summary</h3> 
+  Total <%=User.count%> users.
   </div>
   <div style='clear:both;'>
     
   </div>
 </div>
 <div class='section' >
-<h3>最新10个表单</h3>      
+<h3>Recent 10 surveys</h3>      
 <%= render :partial => '/admin/forms/forms',:locals => {:forms => @recent_forms} %>    
 </div>   
 <div class='section' >
-<h3>最新10个用户</h3>
+<h3>Recent 10 users</h3>
 <table cellspacing="0" cellpadding="0" class='grid'>
 <thead>
   <tr>
     <th>login</th>  
     <th>Email</th>
-    <th>时间</th>
-    <th>操作</th>
+    <th>Time</th>
+    <th>Options</th>
   </tr>
 </thead>
 <tbody> 
@@ -32,7 +32,7 @@
     <td><%=link_to user.login,admin_user_path(user) %></td>
     <td><%=user.email%></td>  
     <td><%=user.created_at %></td>
-    <td><%=link_to '删除',admin_user_path(user),:method => :delete,:confirm => '确定嘛?' %></td>
+    <td><%=link_to 'delete',admin_user_path(user),:method => :delete,:confirm => 'are you sure?' %></td>
   </tr>
   <% end -%> 
 </tbody>

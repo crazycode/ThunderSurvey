@@ -12,7 +12,7 @@
    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script> 
   <![endif]-->
   <%=yield :headers %>
-  <title>管理后台</title>
+  <title>Backend</title>
 
 </head>
 
@@ -21,23 +21,19 @@
     <header id='system'>   
         <nav class='login'>
           <% if logged_in? %>	
-            <a href="/">返回前台</a> 
-            <%= link_to '注销', logout_path, :method => 'delete' %>
+            <a href="/">Back to front</a> 
+            <%= link_to 'Logout', logout_path, :method => 'delete' %>
           <% end %>
         </nav>
         <div class="logo">
-            <h1>抢答-管理</h1>
+            <h1>ThunderSurvey</h1>
         </div>   
         <nav class='nav'>
           <ul>                                               
-            <%=topnav_tab "总览",:url => admin_path,:section => 'dash' %>
-            <%=topnav_tab "表单管理",:url => admin_forms_path,:section => 'forms' %>
-            <%=topnav_tab "用户管理",:url => admin_users_path, :section => 'users' %>
+            <%=topnav_tab "Summary",:url => admin_path,:section => 'dash' %>
+            <%=topnav_tab "Form",:url => admin_forms_path,:section => 'forms' %>
+            <%=topnav_tab "User",:url => admin_users_path, :section => 'users' %>
             <%=topnav_tab "CMS", :url => admin_pages_path, :section => 'pages' %>
-<<<<<<< HEAD:app/views/layouts/admin.html.erb
-            <%#=topnav_tab "用户反馈", :url => admin_feedbacks_path, :section => 'feedbacks' %>
-=======
->>>>>>> f1eac6b0c8438fe740195679f80facf009aac595:app/views/layouts/admin.html.erb
           </ul>  
         </nav>
        <%= render :partial => '/shared/notice' %> 

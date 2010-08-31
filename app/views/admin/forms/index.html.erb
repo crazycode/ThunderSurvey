@@ -1,9 +1,9 @@
-<%=raw(will_paginate @forms,:class => 'flickr_pagination',:previous_label => '前翻',:next_label => '后翻') %> 
+<%=raw(will_paginate @forms,:class => 'flickr_pagination',:previous_label => 'Prev',:next_label => 'Next') %> 
 <%= render :partial => '/admin/forms/forms',:locals => {:forms => @forms} %>    
 
-<%=raw(will_paginate @forms,:class => 'flickr_pagination', :previous_label => '前翻',:next_label => '后翻') %>  
+<%=raw(will_paginate @forms,:class => 'flickr_pagination', :previous_label => 'Prev',:next_label => 'Next') %>  
  
 <% content_for :sidebar do %>
-   <%=link_to '回应最多的',admin_forms_path(:order => 'rows_count desc')%>
+   <%=link_to 'Most answers',admin_forms_path(:order => 'rows_count desc')%>
 <% end %>
  

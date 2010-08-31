@@ -11,10 +11,10 @@
   <col width='5%' />
   <thead>   
     <tr>    
-      <th>标题</th>
-      <th>回应</th>
-      <th>最后更新</th>
-      <th>操作</th>
+      <th>Title</th>
+      <th>Answers</th>
+      <th>Last update</th>
+      <th>Options</th>
     </tr>
   </thead>
   <tbody>  
@@ -23,10 +23,10 @@
         <td class='text-left'><%=link_to form.title, form_path(form), :target => '_blank' %><br /><span class='gray'><%= form.description %></span></td>  
         <td><%= form.klass.count %></td>
         <td> <%= form.updated_at.strftime("%m/%d %H:%M") %></td>            
-        <td><%=link_to('删除',admin_form_path(form), :method => :delete) %></td>   
+        <td><%=link_to('Delete',admin_form_path(form), :method => :delete) %></td>   
       </tr>
     <% end -%>                                              
   </tbody>
   </table>
-  <%=raw will_paginate @forms,:class => 'flickr_pagination',:previous_label => '前翻',:next_label => '后翻' %>
+  <%=raw will_paginate @forms,:class => 'flickr_pagination',:previous_label => 'Prev',:next_label => 'Next' %>
 </div>      

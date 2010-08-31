@@ -6,11 +6,11 @@
   <col width='20%' />
   <thead>   
     <tr>    
-      <th>标题</th>
-      <th>回应</th>
-      <th>最后更新</th>
-      <th>用户名</th>
-      <th>操作</th>
+      <th>Title</th>
+      <th>Ansers</th>
+      <th>Last Update</th>
+      <th>User</th>
+      <th>Option</th>
     </tr>
   </thead>
   <tbody>  
@@ -21,7 +21,7 @@
         <td><%= form.klass.count %></td>
         <td><%= form.updated_at.strftime("%m/%d %H:%M") %></td>
         <td><%=link_to truncate(form.user.login,:length => 10),admin_user_path(form.user) %></td>            
-        <td><%=link_to '查看', form_path(form), :target => '_blank' %> | <%= recommand_link(form) %> | <%=link_to('删除',admin_form_path(form), :method => :delete) %></td>   
+        <td><%=link_to 'View', form_path(form), :target => '_blank' %> | <%= recommand_link(form) %> | <%=link_to('Delete',admin_form_path(form), :method => :delete) %></td>   
       </tr>
     <% end -%>                                              
   </tbody>

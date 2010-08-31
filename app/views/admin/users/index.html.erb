@@ -4,8 +4,8 @@
   <tr>
     <th>login</th>  
     <th>Email</th>
-    <th>时间</th>
-    <th>操作</th>
+    <th>Time</th>
+    <th>Options</th>
   </tr>
 </thead>
 <tbody> 
@@ -14,9 +14,9 @@
     <td><%=link_to user.login,admin_user_path(user) %></td>
     <td><%=user.email%></td>  
     <td><%=user.created_at%></td>
-    <td><%=link_to '删除',admin_user_path(user),:method => :delete,:confirm => '确定嘛?' %></td>
+    <td><%=link_to 'Delete',admin_user_path(user),:method => :delete,:confirm => 'Are you sure?' %></td>
   </tr>
   <% end -%> 
 </tbody>
 </table>    
-<%=raw(will_paginate @events,:class => 'flickr_pagination',:previous_label => '前翻',:next_label => '后翻') %>
+<%=raw(will_paginate @events,:class => 'flickr_pagination',:previous_label => 'Prev',:next_label => 'Next') %>
