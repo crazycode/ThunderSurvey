@@ -1,0 +1,80 @@
+<% content_for :headers do -%> 
+  <%= javascript_include_tag 'form' %>
+  <%= javascript_include_tag 'field' %>
+  <%= javascript_include_tag 'jquery.scrollTo' %>
+  
+  <script type="text/javascript" charset="utf-8">
+    $(window).unload(function() {
+      $('#form_submit').submit();$('#saving').show();
+    });
+    
+    $(function(){
+      $("#form_end_at").datepicker();
+    })
+    // 100以下的留给保留字段
+    var field_count = <%= @form.max_position + 1 %>;   
+    if(field_count < 100) { field_count = 101; }
+    
+    // 用于国际化
+    var dft_form_title = "<%= t(:untitled_form) %>";
+    var dft_form_desc = "<%= t(:describe_your_form) %>";
+    var new_question_regex = /<%= t(:question) %> #\d/;
+    var new_option_regex = /<%= t(:option) %> #\d/;
+    var new_question_title = "<%= t(:question) %> #";
+    var new_option_name = "<%= t(:option) %> #";
+    var delele_link_text = "<%= t(:delete) %>";
+    var other_text = "<%= t(:other) %>";
+  </script>
+
+  <style type="text/css" media="screen">
+    .container {width: 680px; margin:0px auto;padding:0px;}
+    #content{padding:0px;}  
+  </style>      
+<% end -%>   
+<div id="form_wrapper"> 
+  <section class='form_oprate'>
+    <nav>
+      <div class='setting'>
+        <%= link_to t(:access_control), '#', :onclick => "$('#password_setting').dialog({width:420, height:200, title:'#{t(:access_control)}',modal: true});", :class => 'button' %>
+        <%= link_to t(:notify_setting), '#', :onclick => "$('#notify_setting').dialog({width:390, height:280, title:'#{t(:notify_setting)}',modal: true});", :class => 'button' %>
+        <%= link_to t(:embed), '#', :onclick => "$('#iframe').dialog({width:490, height:90, title:'#{t(:embed)}',modal: true,
+                open: function(){$('#iframe').focus()}});", :class => 'button' %>
+        <%= link_to(t(:save),   '#', :onclick => "$('#form_submit').submit();$('#saving').show();",:class => 'button') %> 
+      </div>
+      <div class='new'>
+        <%=link_to(t(:add_question), '#', :onclick => 'form_add_field(this);',:class => 'button',:id => 'add_question') %>
+      </div>
+    </nav>
+  </section>
+   
+  <div id="form" >
+    <%= render :partial => 'setting' %>  
+    <!-- 表单项 --> 
+    <div id="fields">   
+      <% @fields.sort {|f1, f2| f1.position <=> f2.position}.each do |field| %>
+        <%= render :partial => '/fields/field', :object => field, :locals => {:parent => @form, :row => @row} unless (field.inputable == false) %>
+      <% end %>
+    </div>
+
+    <% ['string', 'text', 'radio', 'check', 'drop'].each do |input| %>
+      <div id="<%= input %>_input" style="display:none">
+        <%= render :partial => "/fields/#{input}_form", :locals => {:parent => @form, :field => nil, :row => @row} %>
+      </div>
+    <% end %>
+
+    <div id="field_template" style="display:none;">
+      <%= render :partial => "/fields/field", :locals => {:parent => @form, :field => @field, :row => @row} %>
+    </div>
+  </div>  
+  <!-- 表单尾 -->
+  <section class='form_preview right'>
+    <%= t(:preview) %>: <%= link_to "#{form_url(@form)}", form_path(@form), :target => '_blank' %>
+  </section>
+</div>
+
+<div id="iframe" style="display:none;" class='dialog'>   
+  <p> 
+    <b><%= t(:embed_form_in_your_site) %></b><br />
+    <%= text_field_tag :iframe, "<iframe src='#{form_url(@form)}?embed=true' width='700' height='500' frameborder='0' style='overflow:auto'></iframe>", :style => "width:450px;", :readonly => true, :id => 'simple' %>
+  </p>
+</div>

@@ -1,0 +1,14 @@
+.DS_Store
+db/*.sqlite3
+config/database.yml
+log/*.log
+tmp/**/*
+doc/**/*
+test/**/*
+coverage
+public/images/captcha/*
+public/javascripts/*.cache.js
+public/stylesheets/*.cache.css
+public/system
+tmp/*
+.bundle/*

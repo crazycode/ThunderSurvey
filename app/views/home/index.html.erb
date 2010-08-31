@@ -1,0 +1,30 @@
+<% content_for :headers do %>
+  <style type="text/css" media="screen">
+    .btn span{
+      font-size:12px;
+    }
+  </style>
+<% end %>
+<div class='intro span-24 last'>
+  <div class='guide span-12'>
+    <div class='words span-7'>
+      <h3><%= t(:simplest_online_survey) %></h3>
+      <p>
+        <ul>
+          <li><%= t(:auto_save) %></li>
+          <li><%= t(:easy_to_embed) %></li>
+          <li><%= t(:email_notify) %></li>
+          <li><%= t(:password_protect) %></li>
+          <li><%= t(:easy_export) %></li>
+        </ul>
+      </p>
+      <p>&nbsp;</p>
+      <p><a href='/demo' class='btn'><%= t(:try_with_demo) %></a></p>
+      <p><%= t(:have_an_account) %> <%= link_to t(:login), login_path ,:class => 'ag' %></p>
+    </div>
+  </div>
+
+  <div class='span-10 last'>
+    <%=image_tag 'form.jpg',:class=>'haibao'%>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="options">
+  <% field.options.each do |option| %>
+    <%= render :partial => '/shared/drop_option', :locals => {:value => option.value, :parent => parent, :field => field} %>
+  <% end if field %>
+  <% if field.nil? || field.options.size == 0 %>
+    <%= render :partial => '/shared/drop_option', :locals => {:value => t(:option_one), :parent => parent, :field => field} %>
+  <% end %>
+</div>
+<p>
+    <%= text_field_tag "option", "", :onfocus => "field_add_option(this, 'drop');", :style => "opacity:0.5;" %>
+</p>

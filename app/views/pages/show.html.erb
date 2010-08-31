@@ -1,0 +1,13 @@
+<% content_for :headers do %>
+  <%= stylesheet_link_tag 'page' %>  
+<% end %>                            
+
+<%= content_for :pagenav do -%>  
+<div id="page_nav">
+   <span><%=@page.title%></span> 
+</div>
+<% end %>
+
+<div id='page'>
+  <%= raw(@page.body) %>    
+</div>

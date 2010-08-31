@@ -1,0 +1,27 @@
+<!doctype html>      
+<html lang="zh">
+<head>
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <meta name="description" content="<%= @form.nil? ?  "ThunderSurvey is the simplest free online survey solution, if you perfer to clean and simple survey design, then thundersurvey should be your first choice." : @form.description %>" />
+  <meta name='viewport' content='width=device-width' />
+  <meta charset="utf-8" />
+  <meta name="csrf-token" content="<%= form_authenticity_token %>" />
+  <meta name="csrf-param" content="authenticity_token" />               
+  <%= stylesheet_link_tag 'common',"public", :cache => 'public.cache' %>
+  <%= javascript_include_tag 'jquery', 'jquery-ui', 'jrails', 'rails', 'application', :cache => 'public.cache' %>   
+  <%= yield :headers %>                                                   
+  <title>ThunderSurvey－<%= @form.nil? ? (@page_title||'Free online survey solution.') : @form.title %></title>
+  
+  <script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){     
+      $("input[type='text']").addClass("text_input")
+    })        
+  </script> 
+</head>
+
+<body>
+  <div id="form_container">
+    <%= yield %>
+  </div> 
+</body>
+</html>

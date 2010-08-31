@@ -1,0 +1,59 @@
+<% content_for :headers do -%>
+  <script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){     
+     $("td.title").hover(
+       function(){$(this).find('.action').toggle()})
+     })    
+  </script>
+<% end -%>
+
+
+<div class='span-18'> 
+  <div class='section_nav'>
+    <div class='section_title'>
+       <%= t(:all_surveys) %>
+    </div>
+    <div class='section_button'>
+        <a class='btn' href="#"  onclick="window.open('/forms/new', 'StatusBar', 'toolbar=yes,resizable=yes,scrollbars=no,width=820,height=700,left=0,top=0');" title="new form"><%= t(:create_survey) %></a>  
+    </div>
+  </div>
+  <% if @forms.empty? %>
+    <p style="font-size:14px;"><%= t(:no_survey) %><%= link_to t(:create_first_survey), '#', :onclick => "window.open('/forms/new', 'StatusBar', 'toolbar=yes,resizable=yes,scrollbars=no,width=820,height=700,left=0,top=0');" %></p>
+  <% end %>
+  <table  id='rows' class='grid big' border="0" cellspacing="0" cellpadding="0"> 
+    <col width='65%'>
+    <col width='15%'>
+    <col width='20%'>
+    <thead>
+      <th><%= t(:title) %></th>
+      <th><%= t(:updated_at) %></th>
+      <th><%= t(:operations) %></th>
+    </thead>
+    <tbody> 
+      <% @forms.each do |form| %> 
+      <tr id="<%=form.id%>">        
+        <td><a href="#" onclick="window.open('<%=edit_form_path(form, :edit_key => form.edit_key)%>', '<%= form.id %>', 'toolbar=yes,resizable=yes,scrollbars=no,width=820,height=800,left=0,top=0');" title="new form" class='ag' ><%= t(:edit) %></a> <%=link_to form.title,form_rows_path(form, :edit_key => form.edit_key),:class => 'name' %><div class='count'><%= form.klass.count %> <%= t(:answers) %> <%= '>>' unless form.klass.count == 0%></div>
+        </td>                                                                                 
+        <td><%= form.updated_at.to_date%></td> 
+        <td class='opt'>  
+          <%= link_to t(:preview), form_path(form), :class => 'ag', :target => '_blank' %>
+          <%= link_to t(:delete), form_path(form, :edit_key => form.edit_key), :confirm => t(:are_you_sure), :method => 'delete',:class => 'ag' %>
+        </td>
+      </tr>
+      <% end %>       
+    </tbody>
+    </table>
+    <div class='paginate'>
+<%=raw(will_paginate @forms,:class => 'flickr_pagination',:previous_label => t(:prev),:next_label => t(:next)) %> 
+    </div>
+</div>
+
+<% content_for :sidebar do %>
+  <%= render :partial => t(:sidebar) %>
+<% end %>
+  
+<%= content_for :pagenav do -%>  
+<div id="page_nav">
+   <span><%= t(:my_surveys) %></span> 
+</div>
+<% end %>

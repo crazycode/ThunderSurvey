@@ -1,0 +1,7 @@
+<%  field.options.each do |option| %>
+  <p>
+  <%= check_box_tag "row[f#{field.id}][]", option.value, row.send("f#{field.id}") == option.value %>
+  <%= option.value %>
+  </p>
+<% end %>
+<p style="<%= 'display:none;' if !field.include_other %>" class="question_other"><input name="<%= "row[f#{field.id}][]" %>" value="_other" type="checkbox"/> <%= t(:other) %> <%= text_field_tag "row[f#{field.id}][][other]", '' %></p>
